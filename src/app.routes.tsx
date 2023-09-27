@@ -1,8 +1,9 @@
 import { RouteObject } from 'react-router-dom';
+import { Home } from './pages/home';
 
 const routes: RouteObject[] = [{
     path: '/',
-    element: <h1>Home</h1>
+    element: <Home/>
 }]
 
 export default routes;
