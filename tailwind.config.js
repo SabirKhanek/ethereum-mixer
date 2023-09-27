@@ -8,7 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'sans': ['Bebas Neue', ...defaultTheme.fontFamily.sans]
+        'sans': ['Bebas Neue', ...defaultTheme.fontFamily.sans],
+        'epilogue': ['Epilogue', ...defaultTheme.fontFamily.sans],
       }, 
       colors: {
         'grey': '#333333',
