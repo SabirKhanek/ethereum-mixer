@@ -1,9 +1,10 @@
 import {createPortal} from 'react-dom'
 import { useRef, useState } from "react";
-import close from './close-circle.svg'
+import close from '../../assets/close-circle.svg'
 import mixer_times from '../../shared/constants/mixer_times';
 import { useNavigate, To, createSearchParams } from 'react-router-dom';
 import { isValidBEP20Address } from '../../shared/validators/input';
+import { useMixerDetails } from '../../shared/contexts';
 
 export interface ModalProps {
     isOpen: boolean;
@@ -23,6 +24,7 @@ export function Modal(props: ModalProps) {
         dialog.current?.close()
         onClose()
     }
+    const mixerDetailsContext = useMixerDetails()
 
     const handleContinue = () => {
         if(isValidBEP20Address(reciever_address)) {
@@ -33,6 +35,7 @@ export function Modal(props: ModalProps) {
                     delay: selectedOption.id
                 }).toString()
             }
+            mixerDetailsContext.setMixerDetails({reciever_address, delay: Number.parseInt(selectedOption.id)})
             navigate(obj, {})
         } else setError(true)
     }
@@ -49,8 +52,8 @@ export function Modal(props: ModalProps) {
         <>
         <div className='fixed top-0 left-0 bottom-0 right-0 bg-black/50 z-50' onClick={handleClose}></div>
         
-        <div style={{transform: 'translate(-50%, -50%)'}} className='fixed w-[566px] top-1/2 left-1/2 z-50 bg-light-grey'>
-            <div className='my-2 mx-4 border border-black p-5 relative bg-[#E6E6E6]'>
+        <div style={{transform: 'translate(-50%, -50%)'}} className='fixed  w-[300px] xs:w-3/4 md:w-[566px] top-1/2 left-1/2 z-50 bg-light-grey'>
+            <div className='my-2 mx-3 border border-black p-5 relative bg-[#E6E6E6]'>
                 <button className='absolute top-2 right-2' onClick={handleClose}><img src={close}/></button>
                 
                 <div className='flex justify-center flex-col items-center'>

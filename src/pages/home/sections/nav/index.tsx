@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import eth_bg from  "./ethereum_bg.svg"
-import { Modal } from "../../../../components/modal";
+import { Modal } from "../../../../components/reciever_address_input_modal";
 import { useState } from "react";
 export function Navbar() {
     const [showModal, setShowModal] = useState(false);

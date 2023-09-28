@@ -1,1 +1,0 @@
-// All the assets will be in ./ directory

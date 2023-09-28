@@ -15,7 +15,11 @@ export default {
         'grey': '#333333',
         'light-grey': '#999999',
         ...defaultTheme.colors
-      }
+      }, 
+      screens: {
+        'xs': '425px',
+        ...defaultTheme.screens,
+      },
     },
   },
   plugins: [],
