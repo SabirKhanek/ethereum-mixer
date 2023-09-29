@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   createSearchParams,
   useNavigate,
@@ -111,14 +112,16 @@ export function AwaitMixer() {
   };
 
   return (
-    <>
-      <div className="bg-[#E6E6E6] w-screen h-screen flex justify-center items-center content-center">
+    <div className="min-h-screen h-full bg-[#E6E6E6] overflow-x-hidden overflow-auto">
+      <h1 className="text-xl py-10 bg-[#E6E6E6] text-center">
+        crypto-blender.xyz
+      </h1>
+      <div className="bg-[#E6E6E6] p-3 w-screen overflow-y-auto flex justify-center content-center">
         <div className="max-w-3xl w-full p-1 bg-[#E6E6E6] ">
-          <h1 className="text-xl mb-10 text-center">crypto-blender.xyz</h1>
           <h1 className="text-3xl mb-10 text-center">send payment</h1>
 
-          <div className="mb-2 flex justify-between items-center flex-wrap">
-            <div>
+          <div className="mb-2 gap-y-2 flex justify-between items-center flex-wrap">
+            <div className="grow">
               <label className="text-light-grey text-lg mb-1">To</label>
               <p className="text-xs sm:text-base font-epilogue font-light text-black">
                 {isLoading ? (
@@ -135,9 +138,7 @@ export function AwaitMixer() {
                     {toSend}
                     <img
                       onClick={async () => {
-                        console.log(
-                          await navigator.clipboard.writeText(toSend)
-                        );
+                        navigator.clipboard.writeText(toSend);
                         toast(`Copied '${toSend}' to clipboard`);
                       }}
                       className="inline ml-1 w-5 cursor-pointer"
@@ -151,7 +152,7 @@ export function AwaitMixer() {
             {toSend && (
               <QRCode
                 size={196}
-                className="mx-auto p-3 bg-white rounded-md"
+                className="mx-auto grow-0 p-3 bg-white rounded-md"
                 value={toSend}></QRCode>
             )}
           </div>
@@ -161,20 +162,26 @@ export function AwaitMixer() {
             <p className="text-2xl ">FROM 0.25 TO 25 ETH / WETH</p>
           </div>
 
-          <div className="my-5 flex gap-2">
-            <button
-              className="basis-1/2 flex px-2 py-4 justify-center items-center gap-2 text-xl bg-[#F4C172] border border-grey"
-              onClick={() => navigate({ pathname: "/await_mixer" })}>
-              <span>Awaiting Payment</span>
-              {!isLoading && isAwaiting && (
-                <img className="w-6 animate-spin" src={loading} alt="" />
-              )}
-            </button>
+          <div className="my-5 flex gap-y-4 flex-wrap xs:flex-nowrap justify-between items-center gap-2">
+            <div className="grow flex justify-center">
+              <button
+                className="flex px-4 py-4 justify-center items-center gap-2 text-2xl bg-[#F4C172] border border-grey"
+                onClick={() => navigate({ pathname: "/await_mixer" })}>
+                <span>Awaiting Payment</span>
+                {!isLoading && isAwaiting && (
+                  <img className="w-6 animate-spin" src={loading} alt="" />
+                )}
+              </button>
+            </div>
 
             <div
-              className="basis-1/2 flex justify-center items-center text-xl gap-2 py-4 px-2 border border-grey relative cursor-pointer bg-light-grey text-black"
+              className="text-center text-xl mx-auto grow-0 gap-2 px-7 py-2 border border-grey relative cursor-pointer bg-light-grey text-black rounded-xl"
               onClick={() => setModalVisible(true)}>
-              <span>Click if transaction is confirmed in your wallet</span>
+              <span>
+                Click<br></br> if <br></br> transaction <br></br> is confirmed{" "}
+                <br></br>
+                in your wallet
+              </span>
             </div>
           </div>
 
@@ -211,6 +218,6 @@ export function AwaitMixer() {
       <TransactionHashInputModal
         isOpen={modalVisible}
         onClose={handleModalClose}></TransactionHashInputModal>
-    </>
+    </div>
   );
 }
