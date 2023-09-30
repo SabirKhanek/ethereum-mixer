@@ -97,7 +97,7 @@ export function Modal(props: ModalProps) {
                 <span className="block text-center">
                   A CORRECT ETHEREUM WALLET ADDRESS IS NEEDED
                 </span>
-                <span className="block text-center">
+                <span className="block text-center break-words">
                   e.g., 0x18F5e7743dd3F1af54eBff5FD366dDf3Ee28e410
                 </span>
               </div>
