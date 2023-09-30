@@ -99,11 +99,11 @@ export function Modal(props: ModalProps) {
             )}
           </div>
 
-          <div className="my-5 flex gap-2">
+          <div className="my-5 flex xs:flex-row flex-col-reverse gap-2">
             <div
-              className="basis-1/2 flex justify-center items-center text-xl gap-2 bg-white py-4 border border-grey relative"
+              className="basis-1/2  flex justify-center items-center text-xl gap-2 bg-white py-2 xs:py-4 border border-grey relative"
               onClick={() => setShowDropdown(!showDropdown)}>
-              <span>{selectedOption && selectedOption.value}</span>
+              {selectedOption.value}
               <svg
                 className={
                   "transition-all duration-150" +
@@ -138,7 +138,7 @@ export function Modal(props: ModalProps) {
             </div>
 
             <button
-              className="basis-1/2 flex justify-center items-center gap-2 text-xl bg-[#F4C172] border border-grey"
+              className="basis-1/2 py-2 xs:py-4 flex justify-center items-center gap-2 text-xl bg-[#F4C172] border border-grey"
               onClick={handleContinue}>
               <span>Continue</span>
               <svg

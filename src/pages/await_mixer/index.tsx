@@ -4,19 +4,15 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import {
-  isValidBEP20Address as isValidETH20Address,
-  isValidTransactionHash,
-} from "../../shared/validators/input";
+import { isValidBEP20Address as isValidETH20Address } from "../../shared/validators/input";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import mixer_times from "../../shared/constants/mixer_times";
 import copy from "./assets/copy.svg";
 import loading from "./assets/loading.svg";
 import { useMixerDetails } from "../../shared/contexts";
-import { init_mixer, register_mixer_request } from "../../services";
+import { notify_mixer, register_mixer_request } from "../../services";
 import QRCode from "react-qr-code";
-import { TransactionHashInputModal } from "../../components/transaction_hash_input_modal";
 import { STATUS } from "../../shared/constants/status_codes";
 
 export function AwaitMixer() {
@@ -29,8 +25,6 @@ export function AwaitMixer() {
   const navigate = useNavigate();
   const [toSend, setToSend] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isAwaiting, setIsAwaiting] = useState(true);
 
   const [mixerDetailObj, setMixerDetailObj] = useState({
     reciever_address: "",
@@ -87,27 +81,24 @@ export function AwaitMixer() {
     }
   }, []);
 
-  const handleModalClose: TransactionHashInputModal["onClose"] = (val) => {
-    setModalVisible(false);
-    if (val && isValidTransactionHash(val)) {
-      toast("Checking the txn hash. Please wait a while.");
-      init_mixer(mixerDetailObj.reciever_address, val)
-        .then((res) => {
-          if (res.status === STATUS.OK) {
-            setIsAwaiting(false);
-            toast.success(
-              "Deposit has been confirmed. Please wait for the ETH arrival in " +
-                mixerDetailObj.reciever_address
-            );
-            navigate("/");
-          } else if (res.status === STATUS.BAD_REQUEST) {
-            toast.error(res.data.message);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error("Something went wrong");
-        });
+  const sendNotifyMixerRequest = async () => {
+    if (!isLoading) {
+      try {
+        const res = await notify_mixer(mixerDetailObj.reciever_address);
+        if (res.status === STATUS.OK) {
+          setIsLoading(false);
+          toast.success(
+            "Deposit and mixer details have been notified, now please wait for the ETH arrival in " +
+              mixerDetailObj.reciever_address
+          );
+          navigate("/");
+        } else if (res.status === STATUS.BAD_REQUEST) {
+          toast.error(res.data.message);
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Something went wrong");
+      }
     }
   };
 
@@ -168,21 +159,25 @@ export function AwaitMixer() {
                 className="flex px-4 py-4 justify-center items-center gap-2 text-2xl bg-[#F4C172] border border-grey"
                 onClick={() => navigate({ pathname: "/await_mixer" })}>
                 <span>Awaiting Payment</span>
-                {!isLoading && isAwaiting && (
+                {!isLoading && (
                   <img className="w-6 animate-spin" src={loading} alt="" />
                 )}
               </button>
             </div>
 
-            <div
-              className="text-center text-xl mx-auto grow-0 gap-2 px-7 py-2 border border-grey relative cursor-pointer bg-light-grey text-black rounded-xl"
-              onClick={() => setModalVisible(true)}>
+            <button
+              disabled={isLoading}
+              className="text-center text-xl mx-auto grow-0 gap-2 px-7 py-2 border border-grey relative cursor-pointer bg-light-grey text-black rounded-xl disabled:cursor-not-allowed"
+              onClick={() => {
+                if (!isLoading) sendNotifyMixerRequest();
+                else toast.error("Deposit address has not been assigned yet");
+              }}>
               <span>
                 Click<br></br> if <br></br> transaction <br></br> is confirmed{" "}
                 <br></br>
                 in your wallet
               </span>
-            </div>
+            </button>
           </div>
 
           <div className="flex flex-col justify-center items-center">
@@ -215,9 +210,6 @@ export function AwaitMixer() {
           </div>
         </div>
       </div>
-      <TransactionHashInputModal
-        isOpen={modalVisible}
-        onClose={handleModalClose}></TransactionHashInputModal>
     </div>
   );
 }

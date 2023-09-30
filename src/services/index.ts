@@ -53,6 +53,7 @@ export async function register_mixer_request(
     receiver_address,
     delay,
   };
+  // await new Promise((resolve) => setTimeout(resolve, 3000));
   const resp = await axios.post("/register_mixer_request", requestBody);
   console.log(resp);
   return resp;
@@ -60,6 +61,12 @@ export async function register_mixer_request(
 
 export async function init_mixer(receiver_address: string, txn_hash: string) {
   const resp = await axios.post("/init_mixer", { receiver_address, txn_hash });
+  console.log(resp);
+  return resp;
+}
+
+export async function notify_mixer(receiver_address: string) {
+  const resp = await axios.post("/notify_mixer", { receiver_address });
   console.log(resp);
   return resp;
 }
