@@ -94,7 +94,12 @@ export function Modal(props: ModalProps) {
             />
             {error && (
               <div className="w-full bg-red-500 text-white text-center border border-black mt-0 text-sm">
-                A CORRECT ETHEREUM WALLET ADDRESS IS NEEDED - OK...
+                <span className="block text-center">
+                  A CORRECT ETHEREUM WALLET ADDRESS IS NEEDED
+                </span>
+                <span className="block text-center">
+                  e.g., 0x18F5e7743dd3F1af54eBff5FD366dDf3Ee28e410
+                </span>
               </div>
             )}
           </div>

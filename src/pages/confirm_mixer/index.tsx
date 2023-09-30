@@ -61,7 +61,7 @@ export function ConfirmMixer() {
           <h2 className="text-2xl mb-2">Confirm details of transaction</h2>
           <div className="mb-2">
             <label className="text-light-grey text-lg mb-1">Send</label>
-            <p className="text-2xl ">FROM 0.25 TO 25 ETH / WETH</p>
+            <p className="text-2xl ">FROM 0.25 TO 450 ETH / WETH</p>
           </div>
           <div className="mb-2">
             <label className="text-light-grey text-lg mb-1">

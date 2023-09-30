@@ -150,7 +150,7 @@ export function AwaitMixer() {
 
           <div className="mb-2">
             <label className="text-light-grey text-lg mb-1">Amount</label>
-            <p className="text-2xl ">FROM 0.25 TO 25 ETH / WETH</p>
+            <p className="text-2xl ">FROM 0.25 TO 450 ETH / WETH</p>
           </div>
 
           <div className="my-5 flex gap-y-4 flex-wrap xs:flex-nowrap justify-between items-center gap-2">
