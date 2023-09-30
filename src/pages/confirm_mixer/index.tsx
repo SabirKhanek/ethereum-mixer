@@ -65,7 +65,7 @@ export function ConfirmMixer() {
           </div>
           <div className="mb-2">
             <label className="text-light-grey text-lg mb-1">
-              RECIEVE MIXED ETH / WETH IN
+              RECEVE MIXED ETH / WETH IN
             </label>
             <p className="text-xs sm:text-base font-epilogue font-light text-black">
               {mixerDetailObj.reciever_address}

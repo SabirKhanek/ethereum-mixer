@@ -88,7 +88,7 @@ export function AwaitMixer() {
         if (res.status === STATUS.OK) {
           setIsLoading(false);
           toast.success(
-            "Deposit and mixer details have been notified, now please wait for the ETH arrival in " +
+            "Deposit and mixer details have been received, please wait for the ETH arrival in " +
               mixerDetailObj.reciever_address
           );
           navigate("/");
@@ -183,7 +183,7 @@ export function AwaitMixer() {
           <div className="flex flex-col justify-center items-center">
             <div className="my-2">
               <label className="text-light-grey text-sm md:text-lg mb-1">
-                AFTER THE PAYMENT IS CONFIRMED, YOU WILL RECIEVE MIXED ETH /
+                AFTER THE PAYMENT IS CONFIRMED, YOU WILL RECEIVE MIXED ETH /
                 WETH IN
               </label>
               <p className="text-center text-xs font-epilogue font-light text-black">
