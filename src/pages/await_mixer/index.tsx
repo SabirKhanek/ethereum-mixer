@@ -105,7 +105,7 @@ export function AwaitMixer() {
   return (
     <div className="min-h-screen h-full bg-[#E6E6E6] overflow-x-hidden overflow-auto">
       <h1 className="text-xl py-10 bg-[#E6E6E6] text-center">
-        crypto-blender.xyz
+        crypto-blender.com
       </h1>
       <div className="bg-[#E6E6E6] p-3 w-screen overflow-y-auto flex justify-center content-center">
         <div className="max-w-3xl w-full p-1 bg-[#E6E6E6] ">

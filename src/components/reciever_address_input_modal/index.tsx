@@ -67,7 +67,7 @@ export function Modal(props: ModalProps) {
 
           <div className="flex justify-center flex-col items-center">
             <span className="uppercase text-3xl leading-[1]">
-              crypto-blender.xyz
+              crypto-blender.com
             </span>
             <span className="uppercase text-[20px] leading-[1] font-light">
               anonymize your ethereum

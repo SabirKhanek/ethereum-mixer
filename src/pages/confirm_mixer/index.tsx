@@ -57,7 +57,7 @@ export function ConfirmMixer() {
     <>
       <div className="bg-[#E6E6E6] w-screen h-screen flex justify-center items-center min-h-screen overflow-auto">
         <div className="max-w-md p-4 grow">
-          <h1 className="text-3xl mb-10 text-center">crypto-blender.xyz</h1>
+          <h1 className="text-3xl mb-10 text-center">crypto-blender.com</h1>
           <h2 className="text-2xl mb-2">Confirm details of transaction</h2>
           <div className="mb-2">
             <label className="text-light-grey text-lg mb-1">Send</label>

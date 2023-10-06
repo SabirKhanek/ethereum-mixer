@@ -35,7 +35,7 @@ export function Navbar() {
           <div className="flex flex-col gap-2">
             <div className="flex flex-col justify-center items">
               <span className="uppercase text-xl leading-[1]">
-                crypto-blender.xyz
+                crypto-blender.com
               </span>
               <span className="uppercase text-base leading-[1] font-light">
                 anonymize your ethereum
