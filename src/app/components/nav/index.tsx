@@ -1,12 +1,14 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 import eth_bg from "./ethereum_bg.svg";
 import { Modal } from "../receiver_address_input_modal";
 import { useState } from "react";
 export function Navbar() {
   const [showModal, setShowModal] = useState(false);
+  const pathname = usePathname();
   const openModal = () => {
     setShowModal(true);
   };
@@ -15,14 +17,35 @@ export function Navbar() {
   };
   return (
     <>
-      <section className="py-10 h-[750px] max-w-5xl px-2 mx-auto">
+      <section
+        className={
+          "py-10 max-w-5xl px-2 mx-auto" +
+          (pathname === "/" ? " h-[750px]" : "")
+        }>
         <div
-          style={{ backgroundImage: `url(/ethereum_bg.svg)` }}
+          style={{
+            backgroundImage: `${
+              pathname !== "/" ? "" : "url(/ethereum_bg.svg)"
+            }`,
+          }}
           className="flex justify-between bg-contain bg-clip-content px-2 bg-no-repeat bg-center h-full">
           <div className="flex flex-col gap-1">
-            <div>
-              <Link href={"/"} className="uppercase text-base">
+            <div className="flex gap-2">
+              <Link
+                href={"/"}
+                className={
+                  "uppercase text-base text-light-grey hover:text-white" +
+                  (pathname === "/" ? " text-white" : "")
+                }>
                 Home
+              </Link>
+              <Link
+                href={"/blog"}
+                className={
+                  "uppercase text-base text-light-grey hover:text-white" +
+                  (pathname === "/blog" ? " text-white" : "")
+                }>
+                Blog
               </Link>
             </div>
             <div
