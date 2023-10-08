@@ -15,46 +15,64 @@ export function Navbar() {
   const onClose = () => {
     setShowModal(false);
   };
+
+  const isHomePage = pathname === "/";
+
+  const getLinkClass = (linkPath: string) => {
+    const baseClass = "uppercase text-base";
+    let isActive = false;
+
+    if (linkPath === "/") {
+      isActive = isHomePage;
+    } else {
+      isActive = pathname.startsWith(linkPath);
+    }
+
+    const commonClasses = isActive
+      ? isHomePage
+        ? " text-white"
+        : " text-grey"
+      : isHomePage
+      ? " text-light-grey hover:text-white"
+      : " text-slate-600 hover:text-grey";
+
+    return `${baseClass} ${commonClasses}`;
+  };
+
+  const navSectionClass = `py-10 max-w-5xl px-2 mx-auto${
+    isHomePage ? " h-[750px]" : ""
+  }`;
+
+  const backgroundStyle = {
+    backgroundImage: isHomePage ? `url(${eth_bg.src})` : "",
+  };
+
   return (
     <>
-      <section
-        className={
-          "py-10 max-w-5xl px-2 mx-auto" +
-          (pathname === "/" ? " h-[750px]" : "")
-        }>
+      <section className={navSectionClass}>
         <div
-          style={{
-            backgroundImage: `${
-              pathname !== "/" ? "" : "url(/ethereum_bg.svg)"
-            }`,
-          }}
-          className="flex justify-between bg-contain bg-clip-content px-2 bg-no-repeat bg-center h-full">
+          className={`flex justify-between bg-contain bg-clip-content px-2 bg-no-repeat bg-center h-full`}
+          style={backgroundStyle}>
           <div className="flex flex-col gap-1">
-            <div className="flex gap-2">
-              <Link
-                href={"/"}
-                className={
-                  "uppercase text-base text-light-grey hover:text-white" +
-                  (pathname === "/" ? " text-white" : "")
-                }>
+            <div className="flex gap-3">
+              <Link href={"/"} className={getLinkClass("/")}>
                 Home
               </Link>
-              <Link
-                href={"/blog"}
-                className={
-                  "uppercase text-base text-light-grey hover:text-white" +
-                  (pathname === "/blog" ? " text-white" : "")
-                }>
+              <Link href={"/blog"} className={getLinkClass("/blog")}>
                 Blog
               </Link>
             </div>
             <div
               onClick={openModal}
-              className="z-10 cursor-pointer bg-light-grey text-white text-lg py-1.5 px-2.5 border-[3px] border-black flex gap-1">
+              className={`z-10 cursor-pointer bg-light-grey text-white text-lg py-1.5 px-2.5 border-[3px] border-black flex gap-1 ${
+                pathname !== "/" ? " text-grey" : ""
+              }`}>
               <span>
                 <Image src={eth_bg} width={15} height={15} alt="" />
               </span>
-              <span>Mix Ethereum</span>
+              <span className={!isHomePage ? "text-grey" : ""}>
+                Mix Ethereum
+              </span>
             </div>
           </div>
 
