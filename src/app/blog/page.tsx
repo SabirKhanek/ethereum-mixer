@@ -25,7 +25,7 @@ export default async function BlogSection() {
                     "/blog/" + articleService.turnTitleToTitleUri(article.title)
                   }
                   className="hover:underline transition-all duration-75 hover:text-black">
-                  <h1 className="text-2xl font-semibold">{article.title}</h1>
+                  <h1 className="text-2xl font-medium">{article.title}</h1>
                 </Link>
               </header>
 
