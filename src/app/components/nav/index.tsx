@@ -65,7 +65,7 @@ export function Navbar() {
             <div
               onClick={openModal}
               className={`z-10 cursor-pointer bg-light-grey text-white text-lg py-1.5 px-2.5 border-[3px] border-black flex gap-1 ${
-                pathname !== "/" ? " text-grey" : ""
+                pathname !== "/" ? " text-grey bg-transparent" : ""
               }`}>
               <span>
                 <Image src={eth_bg} width={15} height={15} alt="" />

@@ -9,7 +9,7 @@ export default async function BlogSection() {
   const articleService = new ArticleService();
   const articles = await articleService.getArticles();
   return (
-    <div className="bg-light-grey text-grey rounded-tl-2xl rounded-tr-2xl max-w-2xl p-4 mx-auto">
+    <div className="text-grey rounded-tl-2xl rounded-tr-2xl max-w-2xl p-4 mx-auto">
       {articles
         .sort((a, b) => b.uploadTime.getTime() - a.uploadTime.getTime())
         .map((article, index) => {
