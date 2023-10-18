@@ -20,6 +20,20 @@ export default function RootLayout({
           name="google-site-verification"
           content="ksHtd1aM4whzBNFYaw-uKSa2gZMTOZOY15LyzeR5b-s"
         />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-7WW9N9RLFK"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-7WW9N9RLFK');
+            `,
+          }}
+        />
         <title>crypto-blender.com</title>
       </head>
       <body>
