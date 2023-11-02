@@ -4,12 +4,14 @@ export class ArticleService {
   }
 
   turnTitleToTitleUri(title: string) {
-    const encodedTitle = encodeURIComponent(title);
-    return encodedTitle.toLowerCase().replace(/%20/g, "_"); // Replace spaces with underscores
+    const encodedTitle = encodeURIComponent(
+      title.replace(/[^a-zA-Z0-9\s]/g, "")
+    );
+    return encodedTitle.toLowerCase().replace(/%20/g, "-"); // Replace spaces with underscores
   }
 
   turnTitleUriToTitle(title_uri: string) {
-    const decodedTitle = title_uri.replace(/_/g, "%20"); // Replace underscores with spaces
+    const decodedTitle = title_uri.replace(/-/g, "%20"); // Replace underscores with spaces
     return decodeURIComponent(decodedTitle);
   }
 
