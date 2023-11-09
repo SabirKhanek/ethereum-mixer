@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
-
+import "./index.css";
 export default async function BlogArticle({
   params,
 }: {
@@ -30,7 +30,8 @@ export default async function BlogArticle({
         <Markdown
           rehypePlugins={[rehypeRaw]}
           remarkPlugins={[remarkGfm]}
-          className="font-epilogue text-base">
+          className="font-epilogue text-base"
+        >
           {articleObj.body.replace(/\n/gi, "\n").replace(/\n/gi, "<br/>")}
         </Markdown>
       </section>
