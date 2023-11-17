@@ -2,3 +2,12 @@ h1,
 h2 {
   @apply text-lg uppercase font-bold;
 }
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list-item::before {
+  content: "\2022"; /* Bullet point */
+  margin-right: 0.5em;
+}
