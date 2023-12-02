@@ -11,20 +11,21 @@ export default async function BlogSection() {
   return (
     <div className="text-grey rounded-tl-2xl rounded-tr-2xl max-w-2xl p-4 mx-auto">
       {articles
-        .sort((a, b) => b.uploadTime.getTime() - a.uploadTime.getTime())
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
         .map((article, index) => {
           return (
             <article className={"text-grey break-words"} key={index}>
               <header>
                 <div className="font-epilogue text-slate-700 text-sm mb-1 font-light">
-                  {getTimeAgo(article.uploadTime)} &middot;{" "}
+                  {getTimeAgo(article.createdAt)} &middot;{" "}
                   {article.readTime.toString()} minutes read
                 </div>
                 <Link
                   href={
-                    "/blog/" + articleService.turnTitleToTitleUri(article.title)
+                    "/blog/" + article.uri
                   }
-                  className="hover:underline transition-all duration-75 hover:text-black">
+                  className="hover:underline transition-all duration-75 hover:text-black"
+                >
                   <h1 className="text-2xl font-medium">{article.title}</h1>
                 </Link>
               </header>

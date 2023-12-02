@@ -5,13 +5,17 @@ export const axios = new Axios({
     "Content-Type": "application/json",
   },
   transformRequest: [(data) => JSON.stringify(data)],
-  transformResponse: [(data) => JSON.parse(data)],
+  transformResponse: [
+    (data) => {
+      return JSON.parse(data);
+    },
+  ],
 });
 
-export interface StandardHttpSuccess {
+export interface StandardHttpSuccess<T> {
   success: true;
   message: string;
-  data?: unknown;
+  data: T;
   statusCode: number;
 }
 

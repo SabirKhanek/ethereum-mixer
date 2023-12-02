@@ -11,16 +11,14 @@ export default async function BlogArticle({
   params: { blogTitle: string };
 }) {
   const articleService = new ArticleService();
-  const articleObj = await articleService.getArticleByTitleUri(
-    params.blogTitle
-  );
+  const articleObj = await articleService.getArticleByUri(params.blogTitle);
 
   if (!articleObj) return notFound();
   return (
     <article className="max-w-5xl mx-auto my-0">
       <header className="mb-10">
         <div className="font-epilogue text-slate-700 text-sm mb-1 font-light text-center">
-          {getTimeAgo(articleObj.uploadTime)} &middot;{" "}
+          {getTimeAgo(articleObj.createdAt)} &middot;{" "}
           {articleObj.readTime.toString()} minutes read
         </div>
         <h1 className="break-words text-6xl text-center">{articleObj.title}</h1>
