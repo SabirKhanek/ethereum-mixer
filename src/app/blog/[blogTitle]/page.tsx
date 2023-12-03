@@ -1,9 +1,7 @@
 import { ArticleService } from "@/app/services/article.service";
 import { getTimeAgo } from "@/app/shared/utils/getTimeAgo";
 import { notFound } from "next/navigation";
-import Markdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
+
 import "./index.css";
 export default async function BlogArticle({
   params,
@@ -25,13 +23,7 @@ export default async function BlogArticle({
       </header>
 
       <section className="max-w-xl mx-auto my-0 p-2 pb-12">
-        <Markdown
-          rehypePlugins={[rehypeRaw]}
-          remarkPlugins={[remarkGfm]}
-          className="font-epilogue text-base"
-        >
-          {articleObj.body.replace(/\n/gi, "\n").replace(/\n/gi, "<br/>")}
-        </Markdown>
+        <div dangerouslySetInnerHTML={{ __html: articleObj.body }}></div>
       </section>
     </article>
   );
