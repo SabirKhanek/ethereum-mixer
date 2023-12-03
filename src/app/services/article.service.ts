@@ -26,7 +26,7 @@ function calculateReadTime(htmlString: string) {
 export class ArticleService {
   async getArticles() {
     const response = await axios.get<StandardHttpSuccess<ArticleResponse[]>>(
-      "/blogs"
+      "/blogs" + `?timestamp=${new Date().getTime()}`
     );
     console.log(response.data);
     const articles = response.data.data.map((art) => {
@@ -43,7 +43,7 @@ export class ArticleService {
 
   async getArticleByUri(uri: string) {
     const response = await axios.get<StandardHttpSuccess<ArticleResponse>>(
-      `/blogs/${uri}`
+      `/blogs/${uri}?timestamp=${new Date().getTime()}`
     );
     const article = response.data.data;
     return {
