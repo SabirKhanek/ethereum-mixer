@@ -1,6 +1,4 @@
-import { StandardHttpSuccess, axios } from "../shared/axios_client";
-
-function calculateReadTime(htmlString: string) {
+export function calculateReadTime(htmlString: string) {
   try {
     const wordsPerMinute = 200;
 
@@ -24,34 +22,39 @@ function calculateReadTime(htmlString: string) {
 }
 
 export class ArticleService {
+  baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
   async getArticles() {
-    const response = await axios.get<StandardHttpSuccess<ArticleResponse[]>>(
-      "/blogs" + `?timestamp=${new Date().getTime()}`
+    const timestamp = new Date().getTime();
+    const response = await fetch(
+      `${this.baseUrl}/blogs?timestamp=${timestamp}`
     );
-    console.log(response.data);
-    const articles = response.data.data.map((art) => {
-      const obj: Article = {
-        ...art,
-        createdAt: new Date(art.createdAt),
-        updatedAt: new Date(art.updatedAt),
-        readTime: calculateReadTime(art.body),
-      };
-      return obj;
-    });
+    const data = (await response.json()).data;
+
+    const articles = data.map((art: ArticleResponse) => ({
+      ...art,
+      createdAt: new Date(art.createdAt),
+      updatedAt: new Date(art.updatedAt),
+      readTime: calculateReadTime(art.body),
+    })) as Article[];
+
     return articles;
   }
 
   async getArticleByUri(uri: string) {
-    const response = await axios.get<StandardHttpSuccess<ArticleResponse>>(
-      `/blogs/${uri}?timestamp=${new Date().getTime()}`
+    const timestamp = new Date().getTime();
+    const response = await fetch(
+      `${this.baseUrl}/blogs/${uri}?timestamp=${timestamp}`
     );
-    const article = response.data.data;
-    return {
-      ...article,
-      createdAt: new Date(article.createdAt),
-      updatedAt: new Date(article.updatedAt),
-      readTime: calculateReadTime(article.body),
+    const data = (await response.json()).data;
+
+    const article = {
+      ...data,
+      createdAt: new Date(data.createdAt),
+      updatedAt: new Date(data.updatedAt),
+      readTime: calculateReadTime(data.body),
     } as Article;
+
+    return article;
   }
 }
 
