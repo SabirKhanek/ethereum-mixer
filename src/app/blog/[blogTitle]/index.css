@@ -4,6 +4,24 @@
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
  */
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+h3 {
+  font-size: 22px;
+  font-weight: 600;
+}
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+}
+a:hover {
+  text-decoration: underline;
+}
+a {
+  color: #06c;
+}
 .ql-container {
   box-sizing: border-box;
   font-family: Helvetica, Arial, sans-serif;
