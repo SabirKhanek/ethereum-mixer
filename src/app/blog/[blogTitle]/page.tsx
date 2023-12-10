@@ -22,7 +22,7 @@ export default async function BlogArticle({
         <h1 className="break-words text-6xl text-center">{articleObj.title}</h1>
       </header>
 
-      <section className="max-w-xl mx-auto my-0 p-2 pb-12">
+      <section className="max-w-xl mx-auto my-0 p-2 pb-12 font-epilogue">
         <div dangerouslySetInnerHTML={{ __html: articleObj.body }}></div>
       </section>
     </article>
